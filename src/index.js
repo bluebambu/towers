@@ -21,7 +21,10 @@ const myReducer = (state = initialState, action) => {
   }
 }
 
-const store = createStore(myReducer);
+const store = createStore(
+  myReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 store.subscribe(
   () => {
