@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import Cell from './Cell';
 
 class Column extends Component {
+  constructor(props) {
+    super(props);
+    this.state={ proposedHeight: 7 };
+  }
+
   render() {
     const cells = Array.from(new Array(this.props.length), (x, i) => <Cell key={i + 1}>{i + 1}</Cell>);
     return (
@@ -14,6 +19,10 @@ class Column extends Component {
           <button onClick={this.handleDelete} className="delete">Lower</button>
           <button onClick={this.handleAdd} className="add">Higher</button>
         </div>
+        <div>
+          <input type="number" min="1" max="12" value={this.state.proposedHeight} onChange={this.handleHeightChange}/>
+          <button onClick={this.handleSet}>Set</button>
+        </div>
       </div>
     );
   }
@@ -24,6 +33,14 @@ class Column extends Component {
 
   handleDelete = () => {
     this.props.onDelete();
+  }
+
+  handleSet = () => {
+    this.props.onSetHeight && this.props.onSetHeight(this.state.proposedHeight);
+  }
+
+  handleHeightChange = event => {
+    this.setState({proposedHeight: +event.target.value});
   }
 
 }

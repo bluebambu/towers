@@ -4,11 +4,15 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import { createStore } from 'redux';
-import { INCREASE, DECREASE } from './redux/actionTypes';
+import { INCREASE, DECREASE, SET_HEIGHT } from './redux/actionTypes';
 
 const columnHeightLimit = 12;
 
 const initialState = [7];
+
+function getBoundedHeight(height) {
+  return Math.max(Math.min(height, columnHeightLimit), 0);
+}
 
 const myReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,6 +20,8 @@ const myReducer = (state = initialState, action) => {
       return [Math.min(state[0] + 1, columnHeightLimit)];
     case DECREASE:
       return [Math.max(state[0] - 1, 0)];
+    case SET_HEIGHT:
+      return [getBoundedHeight(action.newHeight)];
     default:
       return state;
   }
