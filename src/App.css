@@ -38,4 +38,13 @@ button:focus {
 
 .set-height {
   width: 5em;
+  background-color: teal;
+}
+
+.add-column {
+  background-color: skyblue;
+}
+
+.remove-column {
+  background-color: salmon;
 }
